@@ -1,4 +1,13 @@
 # app.R
+# Check and install required packages
+required_packages <- c("jsonlite", "shiny")
+
+for (package in required_packages) {
+  if (!requireNamespace(package, quietly = TRUE)) {
+    install.packages(package, dependencies = TRUE)
+  }
+}
+
 library(jsonlite)
 library(shiny)
 source("computeRI.R")
