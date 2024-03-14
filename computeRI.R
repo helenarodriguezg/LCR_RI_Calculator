@@ -48,7 +48,14 @@ plotPointWithinRI <- function(metab, value, age, age_unit){ #, params){
   Ku <- as.double(params[[metab]]$Ku)
   Kl <- as.double(params[[metab]]$Kl)
   
-  age_range <- 0:(16*12)
+  if (age <= 16*12){
+    age_range <- 0:(16*12)
+    x_limit <- c(0, 16)
+  } else {
+    age_range <- (age-(10*12)):(age+(10*12))
+    x_limit <- c((age/12-10), (age/12+10))
+  }
+
   fitted_mean <- B0 + B1*log(age_range+1) + B2*log(age_range+1)^2
   
   top_limit <- exp(1)^(fitted_mean + Ku)
@@ -58,7 +65,7 @@ plotPointWithinRI <- function(metab, value, age, age_unit){ #, params){
   plot(age/12, value,
        main= '',
        ylab = paste(metab, '(nmol/L)'), xlab = "Age (years)",
-       cex = 1.2, pch= 19, col = 'coral', xlim = c(0, 16),
+       cex = 1.2, pch= 19, col = 'coral', xlim = x_limit,
        ylim = c(0, max(top_limit)),
        axes = FALSE)
 

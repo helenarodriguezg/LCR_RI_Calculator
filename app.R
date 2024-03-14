@@ -33,7 +33,7 @@ ui <- fluidPage(
         width = 6
       ),
       mainPanel(
-        strong("Computed reference intervals are:"),
+        strong("Computed reference intervals are classified as:"),
         textOutput("classification"),
         br(),
         strong("Reference values at given age are:"),
